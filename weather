@@ -1,0 +1,16 @@
+import requests
+import time
+
+url = "http://cdn.heweather.com/china-city-list.txt"
+strhtml = requests.get(url)
+strhtml.encoding = 'UTF-8'
+data = strhtml.text
+data1 = data.splitlines()
+for i in range(6):
+    data1.remove(data1[0])
+for item in data1:
+    url_ = "https://free-api.heweather.net/s6/weather/now?location=" + item[2:13] + "&key=f06c90d6c52f427e947921143c5332cf"
+    strhtml_ = requests.get(url_)
+    strhtml_.encoding = 'UTF-8'
+    time.sleep(1)
+    print(strhtml_.text)
